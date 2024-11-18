@@ -1,0 +1,58 @@
+﻿@model Projeto_Consultar_Cnpj.Models.CnpjConsulta
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Resultado da Consulta";
+}
+
+<div class="container py-4" style="background-color: #f8f9fa; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+    <h2 class="mb-4" style="color: #0056b3;">Resultado da Consulta</h2>
+
+    @if (Model != null)
+    {
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h5 class="card-title text-primary mb-3">
+                    <i class="bi bi-building"></i> <strong>@Model.RazaoSocial</strong>
+                </h5>
+                <h6 class="card-subtitle text-muted mb-3">
+                    <i class="bi bi-person-badge"></i> @Model.NomeFantasia
+                </h6>
+                <p class="card-text"><strong>CNPJ:</strong> <span class="text-dark">@Model.Cnpj</span></p>
+
+                @if (Model.AtividadePrincipal != null)
+                {
+                    <p><i class="bi bi-gear"></i> <strong>Atividade Principal:</strong> @Model.AtividadePrincipal.Descricao</p>
+                }
+
+                @if (Model.Situacao != null && !string.IsNullOrEmpty(Model.Situacao.Data))
+                {
+                    DateTime situacaoData;
+                    if (DateTime.TryParse(Model.Situacao.Data, out situacaoData))
+                    {
+                        <p><i class="bi bi-calendar-date"></i> <strong>Data da Situação:</strong> <span class="text-success">@situacaoData.ToString("dd/MM/yyyy")</span></p>
+                    }
+                    else
+                    {
+                        <p><i class="bi bi-calendar-x"></i> <strong>Data da Situação:</strong> <span class="text-danger">Formato inválido</span></p>
+                    }
+                }
+                else
+                {
+                    <p><i class="bi bi-calendar-x"></i> <strong>Data da Situação:</strong> <span class="text-warning">Não disponível</span></p>
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning" role="alert">
+            <i class="bi bi-exclamation-triangle"></i> Nenhum resultado encontrado para o CNPJ consultado.
+        </div>
+    }
+    <div class="text-center mt-4">
+        <a href="/Cnpj" class="btn btn-primary">Voltar</a>
+    </div>
+</div>
+
+
