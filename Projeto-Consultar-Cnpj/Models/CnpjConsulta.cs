@@ -34,4 +34,5 @@ namespace Projeto_Consultar_Cnpj.Models
         [JsonProperty("descricao")]
         public string? Descricao { get; set; }
     }
+
 }

@@ -14,7 +14,6 @@
     <div class="container d-flex align-items-center justify-content-center min-vh-100">
         <div class="row">
             <div class="col text-center">
-
                 <h1>Consulte o CNPJ</h1>
 
                 <div class="input-group">
@@ -22,10 +21,16 @@
                     <input type="text" class="form-control" name="cnpj" placeholder="Digite o CNPJ" />
                 </div>
 
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary mt-3">
                     Consultar <i class="bi bi-arrow-right-circle"></i>
                 </button>
+
+                <!-- Botão para visualizar consultas realizadas -->
+                <a href="@Url.Action("ConsultasRealizadas", "Cnpj")" class="btn btn-outline-secondary mt-3">
+                    Visualizar Consultas <i class="bi bi-file-earmark-text"></i>
+                </a>
             </div>
         </div>
     </div>
 </form>
+

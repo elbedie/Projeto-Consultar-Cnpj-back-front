@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Projeto_Consultar_Cnpj.Models.CnpjConsulta>
+
+@{
+    ViewData["Title"] = "Consultas Realizadas";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h2><i class="bi bi-file-earmark-text"></i> Consultas Realizadas</h2>
+            <p class="lead">Aqui estão as consultas realizadas com todos os detalhes do CNPJ consultado.</p>
+        </div>
+    </div>
+
+    <!-- Verificar se há consultas realizadas -->
+    @if (Model != null && Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>CNPJ</th>
+                        <th>Razão Social</th>
+                        <th>Nome Fantasia</th>
+                        <th>Situação</th>
+                        <th>Data da Situação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var consulta in Model)
+                    {
+                        <tr>
+                            <td>@consulta.Cnpj</td>
+                            <td>@consulta.RazaoSocial</td>
+                            <td>@consulta.NomeFantasia</td>
+                            <td>@consulta.Situacao?.Nome</td>
+                            <td>@consulta.Situacao?.Data</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <!-- Se não houver consultas realizadas -->
+        <div class="alert alert-warning text-center">
+            <i class="bi bi-exclamation-triangle"></i> Não há consultas realizadas ainda.
+        </div>
+    }
+
+    <!-- Botão para voltar ao formulário de consulta -->
+    <div class="text-center mt-4">
+        <a href="@Url.Action("Index", "Cnpj")" class="btn btn-primary btn-lg">
+            <i class="bi bi-arrow-left-circle"></i> Voltar para o Formulário de Consulta
+        </a>
+    </div>
+</div>

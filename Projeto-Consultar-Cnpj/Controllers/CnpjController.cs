@@ -24,11 +24,18 @@ namespace Projeto_Consultar_Cnpj.Controllers
 
             if (consulta != null)
             {
+                CnpjConsultaStorage.AdicionarConsulta(consulta);
                 return View("Resultado", consulta);
             }
 
             ViewBag.ErrorMessage = "CNPJ não encontrado ou erro na consulta.";
             return View("Index");
+        }
+
+        public IActionResult ConsultasRealizadas()
+        {
+            var consultas = CnpjConsultaStorage.ObterConsultas();
+            return View(consultas);
         }
 
     }
