@@ -25,21 +25,30 @@
                     <p><i class="bi bi-gear"></i> <strong>Atividade Principal:</strong> @Model.AtividadePrincipal.Descricao</p>
                 }
 
-                @if (Model.Situacao != null && !string.IsNullOrEmpty(Model.Situacao.Data))
+                @if (Model.Situacao != null)
                 {
-                    DateTime situacaoData;
-                    if (DateTime.TryParse(Model.Situacao.Data, out situacaoData))
+                    <p><i class="bi bi-info-circle"></i> <strong>Situação:</strong> <span class="text-success">@Model.Situacao.Nome</span></p>
+
+                    @if (!string.IsNullOrEmpty(Model.Situacao.Data))
                     {
-                        <p><i class="bi bi-calendar-date"></i> <strong>Data da Situação:</strong> <span class="text-success">@situacaoData.ToString("dd/MM/yyyy")</span></p>
+                        DateTime situacaoData;
+                        if (DateTime.TryParse(Model.Situacao.Data, out situacaoData))
+                        {
+                            <p><i class="bi bi-calendar-date"></i> <strong>Data da Situação:</strong> <span class="text-success">@situacaoData.ToString("dd/MM/yyyy")</span></p>
+                        }
+                        else
+                        {
+                            <p><i class="bi bi-calendar-x"></i> <strong>Data da Situação:</strong> <span class="text-danger">Formato inválido</span></p>
+                        }
                     }
                     else
                     {
-                        <p><i class="bi bi-calendar-x"></i> <strong>Data da Situação:</strong> <span class="text-danger">Formato inválido</span></p>
+                        <p><i class="bi bi-calendar-x"></i> <strong>Data da Situação:</strong> <span class="text-warning">Não disponível</span></p>
                     }
                 }
                 else
                 {
-                    <p><i class="bi bi-calendar-x"></i> <strong>Data da Situação:</strong> <span class="text-warning">Não disponível</span></p>
+                    <p><i class="bi bi-info-circle"></i> <strong>Situação:</strong> <span class="text-warning">Não disponível</span></p>
                 }
             </div>
         </div>
@@ -50,9 +59,8 @@
             <i class="bi bi-exclamation-triangle"></i> Nenhum resultado encontrado para o CNPJ consultado.
         </div>
     }
+
     <div class="text-center mt-4">
         <a href="/Cnpj" class="btn btn-primary">Voltar</a>
     </div>
 </div>
-
-
