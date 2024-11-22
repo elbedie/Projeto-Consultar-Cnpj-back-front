@@ -3,13 +3,6 @@
     ViewData["Title"] = "Consultar CNPJ";
 }
 
-@if (ViewBag.ErrorMessage != null)
-{
-    <div class="alert alert-danger">
-        @ViewBag.ErrorMessage
-    </div>
-}
-
 <form method="post" asp-action="Consultar">
     <div class="container d-flex align-items-center justify-content-center min-vh-100">
         <div class="row">
@@ -20,17 +13,22 @@
                     <span class="input-group-text"><i class="bi bi-search"></i></span>
                     <input type="text" class="form-control" name="cnpj" placeholder="Digite o CNPJ" />
                 </div>
-
-                <button type="submit" class="btn btn-primary mt-3">
+                    @if (ViewBag.ErrorMessage != null)
+                    {
+                        <div class="alert alert-danger">
+                            @ViewBag.ErrorMessage
+                        </div>
+                    }
+                <button type="submit" class="btn btn-primary">
                     Consultar <i class="bi bi-arrow-right-circle"></i>
                 </button>
 
-                <!-- Botão para visualizar consultas realizadas -->
-                <a href="@Url.Action("ConsultasRealizadas", "Cnpj")" class="btn btn-outline-secondary mt-3">
+                <a href="@Url.Action("ConsultasRealizadas", "Cnpj")" class="btn btn-outline-secondary">
                     Visualizar Consultas <i class="bi bi-file-earmark-text"></i>
                 </a>
             </div>
         </div>
     </div>
 </form>
+
 

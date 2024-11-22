@@ -15,9 +15,18 @@
                 <h5 class="card-title text-primary mb-3">
                     <i class="bi bi-building"></i> <strong>@Model.RazaoSocial</strong>
                 </h5>
+                @if (Model.NomeFantasia != null)
+                {
                 <h6 class="card-subtitle text-muted mb-3">
                     <i class="bi bi-person-badge"></i> @Model.NomeFantasia
-                </h6>
+                    </h6>
+                }
+                else
+                {
+                    <h6 class="card-subtitle text-muted mb-3">
+                        <i class="bi bi-person-badge"></i> <span class="text-warning">Não disponível</span>
+                    </h6>
+                }
                 <p class="card-text"><strong>CNPJ:</strong> <span class="text-dark">@Model.Cnpj</span></p>
 
                 @if (Model.AtividadePrincipal != null)

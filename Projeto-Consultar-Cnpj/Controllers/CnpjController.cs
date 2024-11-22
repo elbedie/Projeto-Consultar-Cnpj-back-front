@@ -4,7 +4,7 @@ using Projeto_Consultar_Cnpj.Services;
 namespace Projeto_Consultar_Cnpj.Controllers
 {
     public class CnpjController : Controller
-    {
+    {  
         public IActionResult Index()
         {
             return View();
@@ -19,7 +19,6 @@ namespace Projeto_Consultar_Cnpj.Controllers
                 return View("Index");
             }
 
-            // Usar await para chamar o método assíncrono
             var consulta = await CnpjConsultaService.ConsultarCnpj(cnpj);
 
             if (consulta != null)
