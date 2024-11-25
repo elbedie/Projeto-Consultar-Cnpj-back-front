@@ -7,7 +7,7 @@ namespace Projeto_Consultar_Cnpj.Services
     {
         public static async Task<CnpjConsulta?> ConsultarCnpj(string cnpj)
         {
-            var requisicao = $"https://api.invertexto.com/v1/cnpj/{cnpj}?token=16139|QL7Hc6Mnyy4tnetcu5O9dmT3Vf7Fw976";
+            var requisicao = $"http://ws.hubdodesenvolvedor.com.br/v2/cnpj/?cnpj={cnpj}&token=66842680LqefvPDgFu120682432";
 
             using (HttpClient client = new HttpClient())
             {
@@ -16,13 +16,16 @@ namespace Projeto_Consultar_Cnpj.Services
                 if (response.IsSuccessStatusCode)
                 {
                     var result = await response.Content.ReadAsStringAsync();
-                    var consulta = JsonConvert.DeserializeObject<CnpjConsulta>(result);
-                    return consulta;
+
+                    var resposta = JsonConvert.DeserializeObject<CnpjResposta>(result);
+
+                    if (resposta != null && resposta.Result != null)
+                    {
+                        return resposta.Result;  
+                    }
                 }
-                else
-                {
-                    return null;
-                }
+
+                return null;
             }
         }
     }
